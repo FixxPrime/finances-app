@@ -1,0 +1,40 @@
+<div class="form-container">
+
+    <form #transactionForm="ngForm" (ngSubmit)="onSubmit(transactionForm)">
+
+        <div class="field">
+            <label class="label">Title</label>
+            <div class="control">
+                <input class="input" type="text" name="title" placeholder="Buy car" [(ngModel)]="goal.title" pattern="^(?! +$)[а-яА-Яa-zA-Z0-9\s]+$" required>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label">Amount</label>
+            <div class="other-control">
+                <input class="input" type="text" name="amount" placeholder="500000" [(ngModel)]="goal.goalBalance" pattern="^\d+(\.\d{1,2})?$" required>
+                <p>rub.</p>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="field">
+            <label class="label">Message</label>
+            <div class="control">
+                <textarea class="textarea" name="message" placeholder="Your message" [(ngModel)]="goal.note"></textarea>
+            </div>
+        </div>
+
+        <div class="field is-grouped is-pulled-right">
+            <div class="control">
+                <button class="button is-text" type="button" (click)="cancel()">Cancel</button>
+            </div>
+            <div class="control">
+                <button class="button is-primary" type="submit" [disabled]="!transactionForm.valid">Save</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,60 @@
+<div class="form-container">
+
+    <form #transactionForm="ngForm" (ngSubmit)="onSubmit(transactionForm)">
+
+        <div class="field">
+            <div class="amount-head">
+                <label class="label">Amount</label>
+                <div class="radio-buttons">
+                    <label class="radio">
+                      <input type="radio" name="type" [(ngModel)]="transaction.typeId" value="67e156e9-aee4-44ea-a016-f628f7a954eb" required>
+                      Expense
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="type" [(ngModel)]="transaction.typeId" value="d30ea67f-1370-4572-a5d8-cc554fc01367" required>
+                      Income
+                    </label>
+                </div>
+            </div>
+            <div class="other-control">
+                <input class="input" type="text" name="title" placeholder="5000" [(ngModel)]="transaction.change" pattern="^\d+(\.\d{1,2})?$" required>
+                <p>rub.</p>
+            </div>
+
+            <div class="select is-rounded is-small">
+                <select name="category" [(ngModel)]="transaction.categoryId" required>
+                  <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                </select>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="datetime-field">
+            <label class="label">Date</label>
+            <div class="control">
+                <input class="date-picker" id="calendar" name="date" [ngModel] ="transaction.date| date:'yyyy-MM-dd'" type="date" required>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="field">
+            <label class="label">Message</label>
+            <div class="control">
+                <textarea class="textarea" name="message" placeholder="Your message" [(ngModel)]="transaction.note"></textarea>
+            </div>
+        </div>
+
+        <div class="field is-grouped is-pulled-right">
+            <div class="control">
+                <button class="button is-text" type="button" (click)="cancel()">Cancel</button>
+            </div>
+            <div class="control">
+                <button class="button is-primary" type="submit" [disabled]="!transactionForm.valid">Save</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>

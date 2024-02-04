@@ -1,0 +1,34 @@
+<div #container class="transaction-card-container">
+
+    <div class="card-content" title={{transaction.note}} [routerLink]="'../' + [transaction.id]">
+        <div class="category-icon">
+            <img [src]="'../../../assets/' + category.icon + '.svg'">
+        </div>
+    
+        <div class="transaction-info">
+            <div class="transaction-card-content">
+                <h1 class="transaction-card-title" [ngStyle]="{'color': transaction.typeId === '67e156e9-aee4-44ea-a016-f628f7a954eb' ? ExpenseColor : IncomeColor}">
+                    {{ transaction.typeId === '67e156e9-aee4-44ea-a016-f628f7a954eb' ? '-' : '+' }}{{ transaction.change }} rub.
+                </h1>
+            </div>
+        
+            <div class="transaction-date">
+                <span >
+                    {{ transaction.date | date: 'yyyy-MM-dd' }}
+                </span>
+            </div>
+        
+            <div class="transaction-card-category">            
+                <span [style.background-color]="category.color">
+                    {{category.name}}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="del-button" (click)="delete()">
+        <span class="icon">
+            <i class="fas fa-close"></i>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="main-container">
+        <form class="box" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+            <div class="field">
+              <label class="label">*Email</label>
+              <div class="control">
+                <input class="input" type="email" placeholder="alex@example.com" name="login" [(ngModel)]="email" required>
+              </div>
+            </div>
+          
+            <div class="field">
+              <label class="label">*Password</label>
+              <div class="control">
+                <input class="input" type="password" placeholder="********" name="password" [(ngModel)]="password" required>
+              </div>
+              <a routerLink="../registration">Don't have an account? Signup</a>
+            </div>
+          
+            <p *ngIf="isInvalid">Invalid email or password</p>
+            <button class="button is-primary" type="submit" [disabled]="!loginForm.valid">Sign in</button>
+        </form>
+</div>

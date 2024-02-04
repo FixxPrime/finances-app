@@ -1,0 +1,26 @@
+<div #container class="goal-card-container">
+        <div class="goal-info" title={{goal.note}} [routerLink]="'../' + [goal.id]">
+            <div class="goal-card-content">
+                <h1 class="goal-card-title">
+                    {{goal.title}}
+                </h1>
+                <h1 class="goal-text">
+                    Goal: {{goal.goalBalance}} rub.
+                </h1>
+                <div class="progress-bar">
+                    <progress class="progress is-small" [value]="percent" max="100"
+                        [ngClass]="{
+                            'is-danger': percent < 33,
+                            'is-warning': percent >= 33 && percent < 66,
+                            'is-success': percent >= 66}">{{percent}}</progress>
+                    <p>{{percent}}%</p>
+                </div>
+            </div>
+        </div>
+
+    <div class="del-button" (click)="delete()">
+        <span class="icon">
+            <i class="fas fa-close"></i>
+        </span>
+    </div>
+</div>

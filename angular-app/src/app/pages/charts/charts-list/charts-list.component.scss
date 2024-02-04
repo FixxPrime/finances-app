@@ -1,0 +1,15 @@
+@import '../../../../main-styles.scss';
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 700px;
+
+    margin: auto;
+    padding-top: 50px;
+}
+
+.box.is-menu{
+    height: 190px;
+}

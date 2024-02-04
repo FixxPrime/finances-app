@@ -1,0 +1,27 @@
+<div class="main-container">
+    <form class="box" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <div class="field">
+            <label class="label">*Name</label>
+            <div class="control">
+              <input class="input" placeholder="alex" name="name" [(ngModel)]="user.name" minlength="4" required>
+            </div>
+          </div>
+
+        <div class="field">
+          <label class="label">*Email</label>
+          <div class="control">
+            <input class="input" type="email" placeholder="alex@example.com" name="login" [(ngModel)]="user.email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+          </div>
+        </div>
+      
+        <div class="field">
+          <label class="label">*Password</label>
+          <div class="control">
+            <input class="input" type="password" placeholder="********" name="password" [(ngModel)]="user.password" minlength="8" required>
+          </div>
+          <a routerLink="../login">Have an account? Signin</a>
+        </div>
+      
+        <button class="button is-primary" type="submit" [disabled]="!registerForm.valid">Sign up</button>
+    </form>
+</div>

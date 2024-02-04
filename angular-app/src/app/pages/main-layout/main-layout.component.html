@@ -1,0 +1,30 @@
+<div class="layout-box">
+
+        <div class="top-bar">
+            <div class="logo-nav">
+                <h1>&#10697; Finances App | </h1>
+                <ul class="nav-bar">
+                    <a class="nav-link" routerLink="transactions/list" routerLinkActive="active">Transactions</a>
+                    <a class="nav-link" routerLink="goals/list" routerLinkActive="active">Goals</a>
+                    <a class="nav-link" routerLink="charts" routerLinkActive="active">Charts</a>
+                </ul>
+            </div>
+            <div class="user-bar">
+                <div class="user-info">
+                    <p>Name: {{user.name}}</p>
+                    <p>Balance: {{user.balance}}</p>
+                </div>
+                <div class="exit">
+                    <p>│</p>
+                    <a (click)="logout()">Logout</a>
+                </div>
+            </div>
+        </div>
+        
+    <div class="page-content">
+        <router-outlet (activate)="updateUserInformation()">
+            
+        </router-outlet>
+    </div>
+
+</div>

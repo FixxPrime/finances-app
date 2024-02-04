@@ -1,0 +1,65 @@
+@import '../../../../main-styles.scss';
+
+.layout-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    overflow: hidden;
+
+    .page-content {
+        flex-grow: 1;
+        overflow-y: scroll;
+    }
+}
+
+.top-bar {
+    height: 68px;
+    width: 80%;
+    margin: auto;
+    background: linear-gradient(to right, $main, $main2);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    box-shadow: 0px 0px 10px 0px rgba(black, 0.15);
+
+    display: flex;
+    flex-shrink: 0;
+
+    justify-content: center;
+    align-items: center;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    h1 {
+        color: white;
+        font-size: 24px;
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    a {
+        color: white;
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    a:hover {
+        text-decoration-line: underline;
+    }
+
+    a.active {
+        background: linear-gradient(to left, white, white);
+        background-position: 0 100%;
+        background-size: 100% 2px;
+        background-repeat: repeat-x;
+    }
+}
+
+.nav-bar {
+    margin-top: 5px;
+}

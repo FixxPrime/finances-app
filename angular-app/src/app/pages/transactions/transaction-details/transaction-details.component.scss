@@ -1,0 +1,84 @@
+@import '../../../../main-styles.scss';
+
+.form-container {
+    max-width: 500px;
+
+    margin: auto;
+    margin-top: 50px;
+}
+
+.button.is-text{
+    color: black;
+}
+
+.button.is-primary{
+    background-color: rgba($main, 0.9);
+}
+
+input, textarea, select{
+
+    &.ng-invalid.ng-touched{
+        border-color: red;
+        
+        &.focus{
+            box-shadow: 0px 0px 0px 2px rgba(red, 0.1);
+        }
+    }
+}
+
+.other-control{
+    display: flex;
+
+    p{
+        margin: auto;
+        font-size: 22px;
+        margin-left: 10px;
+    }
+}
+
+.amount-head{
+    display: flex;
+}
+
+.radio-buttons{
+    margin-left: 20px;
+}
+
+.select{
+    margin-top: 10px;
+}
+
+.datetime-field{
+    display: flex;
+    align-items: center;
+
+    label{
+        margin-top: 10px;
+        margin-right: 20px;
+    }
+}
+
+.date-picker{
+    background-color: #f3f5fa;
+    padding: 5px;
+    font-family: "Roboto Mono", monospace;
+    color: #000;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+::-webkit-calendar-picker-indicator{
+    background-color: rgba($main, 0.3);
+    opacity: 0.75;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}

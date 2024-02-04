@@ -1,0 +1,101 @@
+@import '../../../main-styles.scss';
+
+.layout-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    overflow: hidden;
+
+    .page-content {
+        flex-grow: 1;
+        overflow-y: scroll;
+    }
+}
+
+
+.top-bar {
+    position: relative;
+    
+    height: 68px;
+    width: 80%;
+    margin: auto;
+    background: linear-gradient(to right, $main, $main2);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    
+    box-shadow: 0px 0px 10px 0px rgba(black, 0.15);
+    
+    display: flex;
+    flex-shrink: 0;
+    
+    align-items: center;
+    
+    text-align: center;
+    padding: 30px 10%;
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    .logo-nav{
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+
+    .user-bar{
+        display: flex;
+        right: 10px;
+        justify-content: center;
+        align-items: center;
+
+        margin-right: auto;
+        padding-left: 100px;
+
+        .exit{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    
+            p{
+                font-size: 30px;
+            }
+    
+            a{
+                margin-left: 0px;
+            }
+        }
+    }
+
+
+    h1 {
+        color: white;
+        font-size: 24px;
+    }
+
+    a {
+        color: white;
+        font-size: 18px;
+        margin-left: 10px;
+    }
+    
+    p{
+        color: white;
+        font-size: 15px;
+        margin-left: 3px;
+    }
+    
+    a:hover {
+        text-decoration-line: underline;
+    }
+    
+    a.active {
+        background: linear-gradient(to left, white, white);
+        background-position: 0 100%;
+        background-size: 100% 2px;
+        background-repeat: repeat-x;
+    }
+
+}

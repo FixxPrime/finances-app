@@ -1,0 +1,25 @@
+<div class="main-container">   
+    <div class="search-bar-container">
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input is-rounded" type="text" placeholder="Search For" #input (keyup.enter)="searchTransactions(input.value)" (keyup)="checkNoneSearch(input.value)">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-search"></i>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <span class="loader" *ngIf="isLoading"></span>
+        
+    <div class="goals-list" [@listAnim]>
+        <app-goal-card *ngFor="let goal of goals;"
+                        (delete)="deleteGoal(goal)"
+                        goalId="{{goal}}"
+                        @itemAnim></app-goal-card>
+    </div>
+        
+    <button class="button floating-add-button is-primary" routerLink="../new">
+        +Add
+    </button>    
+</div>
