@@ -3,6 +3,14 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Ignore node_modules in angular-app
+/angular-app/node_modules
+
+# Ignore build output in angular-app
+/angular-app/dist
+/angular-app/tmp
+/angular-app/out-tsc
+
 # User-specific files
 *.rsuser
 *.suo
