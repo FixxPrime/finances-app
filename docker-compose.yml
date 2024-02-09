@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+
+  angular:
+    image: finances-app-image
+    build:
+      context: ./angular-app
+      dockerfile: Dockerfile
+    ports:
+      - 8090:80
+
+  api:
+    image: api-image
+    build:
+      context: ./asp-web-api/Web-API
+      dockerfile: Dockerfile
+    ports:
+      - 7132:80

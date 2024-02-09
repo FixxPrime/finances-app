@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+
+  angular:
+    image: fixprime/finances-app-image:latest
+    ports:
+      - 8090:80
+
+  api:
+    image: fixprime/api-image:latest
+    ports:
+      - 7132:80
