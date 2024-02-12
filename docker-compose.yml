@@ -3,6 +3,9 @@ services:
 
   angular:
     image: finances-app-image
+    container_name: finances-app-container
+    depends_on: 
+      - api
     build:
       context: ./angular-app
       dockerfile: Dockerfile
@@ -11,8 +14,25 @@ services:
 
   api:
     image: api-image
+    container_name: api-container
+    depends_on: 
+      - database
     build:
       context: ./asp-web-api/Web-API
       dockerfile: Dockerfile
     ports:
       - 7132:80
+
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql_server
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=FixPrime123!
+    volumes:
+      - ./sql-data/data:/var/opt/mssql/data
+      - ./sql-data/log:/var/opt/mssql/log
+      - ./sql-data/secrets:/var/opt/mssql/secrets
+    user: root
