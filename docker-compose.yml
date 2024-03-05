@@ -17,6 +17,7 @@ services:
     container_name: api-container
     depends_on: 
       - database
+      - minio
     build:
       context: ./asp-web-api/Web-API
       dockerfile: Dockerfile
@@ -30,9 +31,22 @@ services:
       - 1433:1433
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=FixPrime123!
+      - SA_PASSWORD=${SQL_PASSWORD}
     volumes:
       - ./sql-data/data:/var/opt/mssql/data
       - ./sql-data/log:/var/opt/mssql/log
       - ./sql-data/secrets:/var/opt/mssql/secrets
     user: root
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio-container
+    command: server --console-address ":9001" /data/
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ./minio-storage:/data

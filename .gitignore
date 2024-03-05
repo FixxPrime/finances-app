@@ -11,6 +11,9 @@
 /angular-app/tmp
 /angular-app/out-tsc
 
+# Ignore sql-data
+/sql-data
+
 # User-specific files
 *.rsuser
 *.suo
