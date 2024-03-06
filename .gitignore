@@ -13,6 +13,8 @@
 
 # Ignore sql-data
 /sql-data
+*.mdf
+*.ldf
 
 # User-specific files
 *.rsuser

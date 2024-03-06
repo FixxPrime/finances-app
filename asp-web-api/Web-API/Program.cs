@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Minio;
 using Web_API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Add Minio using the custom endpoint and configure additional settings for default MinioClient initialization
+var minioConfig = builder.Configuration.GetSection("MinioSettings");
+
+builder.Services.AddMinio(configureClient => configureClient
+    .WithEndpoint(minioConfig["Endpoint"])
+    .WithCredentials(minioConfig["AccessKey"], minioConfig["SecretKey"])
+    .WithSSL(bool.Parse(minioConfig["Secure"])));
 
 var app = builder.Build();
 
