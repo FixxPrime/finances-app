@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { SafeUrl } from '@angular/platform-browser';
 import { Category } from 'src/app/models/category.model';
 import { Transaction } from 'src/app/models/transaction.model';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { MinioService } from 'src/app/services/minio.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 
 @Component({
@@ -20,9 +22,11 @@ export class TransactionCardComponent implements OnInit{
   
   ExpenseColor: string = '#9B4454';
   IncomeColor: string = '#ABBD85';
+  iconsrc: SafeUrl;
 
   constructor(private transactionsService: TransactionsService,
-              private categoryService: CategoriesService){ }
+              private categoryService: CategoriesService,
+              private minIOService: MinioService){ }
 
   ngOnInit(): void {
     this.category.icon = "white-small-square";
@@ -35,6 +39,16 @@ export class TransactionCardComponent implements OnInit{
         .subscribe({
           next: (category) =>{
             this.category = category;
+
+            this.minIOService.getIconCategory(this.category.icon)
+            .subscribe({
+              next: (iconsrc) =>{
+                this.iconsrc = iconsrc;
+              },
+              error: (response)=>{
+                console.log(response);
+              }
+            });
           },
           error: (response)=>{
             console.log(response);

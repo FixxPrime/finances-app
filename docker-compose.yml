@@ -4,6 +4,7 @@ services:
   angular:
     image: finances-app-image
     container_name: finances-app-container
+    restart: always
     depends_on: 
       - api
     build:
@@ -15,6 +16,7 @@ services:
   api:
     image: api-image
     container_name: api-container
+    restart: always
     depends_on: 
       - database
       - minio
@@ -27,6 +29,7 @@ services:
   database:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sql_server
+    restart: always
     ports:
       - 1433:1433
     environment:
@@ -41,6 +44,7 @@ services:
   minio:
     image: minio/minio:latest
     container_name: minio-container
+    restart: always
     command: server --console-address ":9001" /data/
     ports:
       - "9000:9000"
