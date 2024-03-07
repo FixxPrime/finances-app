@@ -2,7 +2,7 @@ version: "3.8"
 services:
 
   angular:
-    image: finances-app-image
+    image: finances-app
     container_name: finances-app-container
     restart: always
     depends_on: 
@@ -14,7 +14,7 @@ services:
       - 8090:80
 
   api:
-    image: api-image
+    image: api
     container_name: api-container
     restart: always
     depends_on: 
@@ -43,7 +43,7 @@ services:
 
   minio:
     image: minio/minio:latest
-    container_name: minio-container
+    container_name: minio
     restart: always
     command: server --console-address ":9001" /data/
     ports:
