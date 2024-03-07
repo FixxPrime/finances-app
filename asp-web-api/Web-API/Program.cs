@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Minio;
+using System.Net;
 using Web_API.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,7 @@ var minioConfig = builder.Configuration.GetSection("MinioSettings");
 builder.Services.AddMinio(configureClient => configureClient
     .WithEndpoint(minioConfig["Endpoint"])
     .WithCredentials(minioConfig["AccessKey"], minioConfig["SecretKey"])
+    .WithProxy(new WebProxy(minioConfig["Proxy"], int.Parse(minioConfig["ProxyPort"])))
     .WithSSL(bool.Parse(minioConfig["Secure"])));
 
 var app = builder.Build();
