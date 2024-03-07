@@ -3,7 +3,7 @@ services:
 
   angular:
     image: finances-app
-    container_name: finances-app-container
+    container_name: finances-app
     restart: always
     depends_on: 
       - api
@@ -12,10 +12,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8090:80
+    networks:
+      - frontend
+      - backend
 
   api:
     image: api
-    container_name: api-container
+    container_name: api
     restart: always
     depends_on: 
       - database
@@ -25,6 +28,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 7132:80
+    networks:
+      - backend
 
   database:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -40,6 +45,8 @@ services:
       - ./sql-data/log:/var/opt/mssql/log
       - ./sql-data/secrets:/var/opt/mssql/secrets
     user: root
+    networks:
+      - backend
 
   minio:
     image: minio/minio:latest
@@ -54,3 +61,11 @@ services:
       - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
     volumes:
       - ./minio-storage:/data
+    networks:
+      - backend
+      
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
