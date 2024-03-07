@@ -4,27 +4,16 @@
 
 ## Stack
 - [Angular](https://angular.io/Angular/) - A free and open-source front-end library
-- [EntityFramework Core](https://learn.microsoft.com/ru-ru/ef/core/) - A technology for accessing databases from Microsoft
-- [Bulma](https://bulma.io/) - A free, open source framework that provides ready-to-use front end components
+- [ASP.NET](https://learn.microsoft.com/en-us/aspnet/core) - A framework for building web apps and services with .NET and C#.
+- [MS SQL](https://www.microsoft.com/en-US/sql-server/sql-server-downloads) - A relational database management system
+- [MinIO](https://min.io) - A high-performance, S3 compatible object store.
 
 ## How to launch a project
 
 
-Clone the repository
+Install docker and run docker-compose
 
 
 ```
-git clone https://github.com/FixxPrime/finances-app.git
-```
-
-Install dependencies
-
-```
-npm install
-```
-
-Start the server
-
-```
-ng serve
+docker-compose up
 ```
