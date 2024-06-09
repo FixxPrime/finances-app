@@ -1,0 +1,46 @@
+.card{
+    margin-bottom: 30px;
+    width: auto;
+    width: 700px;
+}
+
+.datetime-field{
+    display: flex;
+    align-items: center;
+
+    padding: 10px;
+}
+  
+.filterText{
+    font-size: 18px;
+}
+  
+.separator{
+    margin-left: 10px;
+}
+  
+.date-picker{
+    margin-left: 15px;
+    background-color: #f3f5fa;
+    padding: 5px;
+    font-family: "Roboto Mono", monospace;
+    color: #000;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+  
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  
+}
+
+.search{
+    margin-left: 10px;
+    height: 25px;
+
+    position: absolute;
+    right: 10px;
+}

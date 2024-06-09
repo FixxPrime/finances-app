@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web_API.Data;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Web_API.Controllers
 {
@@ -17,9 +18,21 @@ namespace Web_API.Controllers
 
         [HttpGet]
         [Route("line/balance")]
-        public async Task<IActionResult> GetBalanceChart(Guid idUser)
+        public async Task<IActionResult> GetBalanceChart([FromQuery] DateTime dateStart, [FromQuery] DateTime dateEnd, Guid idUser)
         {
-            var transactions = await _databaseContext.Transactions.Where(t => t.UserId == idUser).OrderByDescending(e => e.Date).ToListAsync();
+            var query = _databaseContext.Transactions.Where(t => t.UserId == idUser);
+
+            if (dateStart != DateTime.MinValue)
+            {
+                query = query.Where(n => n.Date >= dateStart);
+            }
+
+            if (dateEnd != DateTime.MinValue)
+            {
+                query = query.Where(n => n.Date <= dateEnd.AddDays(1));
+            }
+
+            var transactions = await query.OrderByDescending(e => e.Date).ToListAsync();
 
             var groupedTransactions = transactions
                 .GroupBy(t => t.Date.Date)
@@ -50,9 +63,21 @@ namespace Web_API.Controllers
 
         [HttpGet]
         [Route("pie/expense")]
-        public async Task<IActionResult> GetExpenseChart(Guid idUser)
+        public async Task<IActionResult> GetExpenseChart([FromQuery] DateTime dateStart, [FromQuery] DateTime dateEnd, Guid idUser)
         {
-            var transactions = await _databaseContext.Transactions.Where(t => t.UserId == idUser && t.TypeId == new Guid("67e156e9-aee4-44ea-a016-f628f7a954eb")).OrderByDescending(e => e.Date).ToListAsync();
+            var query = _databaseContext.Transactions.Where(t => t.UserId == idUser && t.TypeId == new Guid("67e156e9-aee4-44ea-a016-f628f7a954eb"));
+
+            if (dateStart != DateTime.MinValue)
+            {
+                query = query.Where(n => n.Date >= dateStart);
+            }
+
+            if (dateEnd != DateTime.MinValue)
+            {
+                query = query.Where(n => n.Date <= dateEnd.AddDays(1));
+            }
+
+            var transactions = await query.OrderByDescending(e => e.Date).ToListAsync();
 
             var categories = await _databaseContext.Categories.ToListAsync();
 
@@ -71,9 +96,21 @@ namespace Web_API.Controllers
 
         [HttpGet]
         [Route("pie/income")]
-        public async Task<IActionResult> GetIncomeChart(Guid idUser)
+        public async Task<IActionResult> GetIncomeChart([FromQuery] DateTime dateStart, [FromQuery] DateTime dateEnd, Guid idUser)
         {
-            var transactions = await _databaseContext.Transactions.Where(t => t.UserId == idUser && t.TypeId != new Guid("67e156e9-aee4-44ea-a016-f628f7a954eb")).OrderByDescending(e => e.Date).ToListAsync();
+            var query = _databaseContext.Transactions.Where(t => t.UserId == idUser && t.TypeId != new Guid("67e156e9-aee4-44ea-a016-f628f7a954eb"));
+
+            if (dateStart != DateTime.MinValue)
+            {
+                query = query.Where(n => n.Date >= dateStart);
+            }
+
+            if (dateEnd != DateTime.MinValue)
+            {
+                query = query.Where(n => n.Date <= dateEnd.AddDays(1));
+            }
+
+            var transactions = await query.OrderByDescending(e => e.Date).ToListAsync();
 
             var categories = await _databaseContext.Categories.ToListAsync();
 

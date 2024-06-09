@@ -34,4 +34,22 @@ export class ChartLineComponent implements OnInit{
       }
     });
   }
+
+  search(){
+    var dateStartElement = <HTMLInputElement> document.getElementById('dateStart');
+    var dateStart = new Date(dateStartElement.value);
+
+    var dateEndElement = <HTMLInputElement> document.getElementById('dateEnd');
+    var dateEnd = new Date(dateEndElement.value);
+
+    this.chartsService.getLineBalanceByDate(dateStart, dateEnd, this.authService.getSession())
+    .subscribe({
+      next: (chartData) =>{
+        this.lineChartData = chartData;
+      },
+      error: (response)=>{
+        console.log(response);
+      }
+    });
+  }
 }

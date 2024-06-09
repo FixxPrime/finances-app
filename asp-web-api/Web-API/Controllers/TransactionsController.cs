@@ -35,18 +35,37 @@ namespace Web_API.Controllers
         }
 
         [HttpGet]
-        [Route("{text}")]
-        public async Task<IActionResult> GetAllTransactionsIdsByText([FromRoute] string text, Guid idUser)
+        [Route("search")]
+        public async Task<IActionResult> GetAllTransactionsIdsByText([FromQuery] string text,
+                                                                     [FromQuery] DateTime dateStart,
+                                                                     [FromQuery] DateTime dateEnd,
+                                                                     Guid idUser)
         {
+            if (text == null)
+            {
+                text = "";
+            }
             text = text.ToLower();
 
             var categoryId = await _databaseContext.Categories.Where(c => c.Name.ToLower().Contains(text)).Select(c => c.Id).FirstOrDefaultAsync();
 
-            var transactionsIds = await _databaseContext.Transactions.Where(
+            var transactionsquery = _databaseContext.Transactions.Where(
                 n => n.UserId == idUser
                     && (n.Change.ToString().Contains(text)
                     || n.Note.ToLower().Contains(text)
-                    || n.CategoryId == (categoryId))).OrderByDescending(e => e.Date).Select(t => t.Id).ToListAsync();
+                    || n.CategoryId == (categoryId)));
+
+            if (dateStart != DateTime.MinValue)
+            {
+                transactionsquery = transactionsquery.Where(n => n.Date >= dateStart);
+            }
+
+            if (dateEnd != DateTime.MinValue)
+            {
+                transactionsquery = transactionsquery.Where(n => n.Date <= dateEnd.AddDays(1));
+            }
+
+            var transactionsIds = await transactionsquery.OrderByDescending(e => e.Date).Select(t => t.Id).ToListAsync();
 
             if (transactionsIds == null)
             {

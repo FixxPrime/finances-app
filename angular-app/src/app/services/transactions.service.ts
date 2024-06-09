@@ -23,9 +23,18 @@ export class TransactionsService {
     return this.http.get<string[]>(this.baseApiUrl + '/api/Transactions/ids', {params});
   }
 
-  getAllTransactionsIdByText(textRequest: string, idUser: string): Observable<string[]>{
-    const params = new HttpParams().set('idUser', idUser);
-    return this.http.get<string[]>(this.baseApiUrl + '/api/Transactions/' + textRequest, {params});
+  getAllTransactionsIdByText(textRequest: string, dateStart: Date, dateEnd: Date, idUser: string): Observable<string[]>{
+    let params = new HttpParams().set('idUser', idUser).set('text', textRequest);
+  
+    if(dateStart && !isNaN(dateStart.getTime())) {
+      params = params.set('dateStart', dateStart.toISOString());
+    }
+    
+    if(dateEnd && !isNaN(dateEnd.getTime())) {
+      params = params.set('dateEnd', dateEnd.toISOString());
+    }
+    
+    return this.http.get<string[]>(this.baseApiUrl + '/api/Transactions/search/', {params});
   }
 
   addTransaction(addTransactionRequest: Transaction): Observable<Transaction>{

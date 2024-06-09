@@ -109,22 +109,37 @@ export class TransactionsListComponent implements OnInit{
     });
   }
 
-  checkNoneSearch(textRequest: string){
-    if(textRequest.trim() === ""){
-      this.getAllTransactionsId();
-      return;
-    }
+  search(textRequest: string){
+    this.isLoading = true;
+
+    var dateStartElement = <HTMLInputElement> document.getElementById('dateStart');
+    var dateStart = new Date(dateStartElement.value);
+
+    var dateEndElement = <HTMLInputElement> document.getElementById('dateEnd');
+    var dateEnd = new Date(dateEndElement.value);
+
+    this.transactionsService.getAllTransactionsIdByText(textRequest.trim(), dateStart, dateEnd, this.authService.getSession())
+    .subscribe({
+      next: (transactionsIds) =>{
+        this.isLoading = false;
+        this.transactions = transactionsIds;
+      },
+      error: (response)=>{
+        console.log(response);
+      }
+    });
   }
 
   searchTransactions(textRequest: string){
     this.isLoading = true;
 
-    if(textRequest.trim() === ""){
-      this.getAllTransactionsId();
-      return;
-    }
+    var dateStartElement = <HTMLInputElement> document.getElementById('dateStart');
+    var dateStart = new Date(dateStartElement.value);
 
-    this.transactionsService.getAllTransactionsIdByText(textRequest.trim(),this.authService.getSession())
+    var dateEndElement = <HTMLInputElement> document.getElementById('dateEnd');
+    var dateEnd = new Date(dateEndElement.value);
+
+    this.transactionsService.getAllTransactionsIdByText(textRequest.trim(), dateStart, dateEnd, this.authService.getSession())
     .subscribe({
       next: (transactionsIds) =>{
         this.isLoading = false;
